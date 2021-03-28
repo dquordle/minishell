@@ -6,7 +6,7 @@
 /*   By: btammara <btammara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 08:32:46 by btammara          #+#    #+#             */
-/*   Updated: 2021/03/28 20:03:01 by btammara         ###   ########.fr       */
+/*   Updated: 2021/03/28 20:10:16 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <string.h>
 # include <sys/errno.h>
 
-# define HISTFILE "/goinfre/minishell_hist.txt"
+# define HISTFILE "/goinfre/minishell_history.txt"
 
 int		g_signal;
 

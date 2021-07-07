@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove_MAIN.c                                  :+:      :+:    :+:   */
+/*   memmove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/31 10:33:08 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/06 10:53:29 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/29 22:39:40 by dquordle          #+#    #+#             */
+/*   Updated: 2020/11/06 16:09:39 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*str1;
-	char	*str2;
-	size_t	i;
+	char		*my_dst;
+	const char	*my_src;
+	size_t		i;
 
-	str1 = (char*)dst;
-	str2 = (char*)src;
-	i = 0;
 	if (dst == NULL && src == NULL)
 		return (NULL);
-	if (str1 <= str2 || str1 >= (str2 + len))
+	my_dst = dst;
+	my_src = src;
+	if (dst <= src)
 	{
+		i = 0;
 		while (i < len)
 		{
-			str1[i] = str2[i];
+			my_dst[i] = my_src[i];
 			i++;
 		}
 	}
 	else
 	{
 		while (len--)
-			str1[len] = str2[len];
+			my_dst[len] = my_src[len];
 	}
 	return (dst);
 }

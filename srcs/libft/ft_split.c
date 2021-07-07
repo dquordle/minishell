@@ -1,93 +1,97 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 10:55:10 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/03 08:06:46 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/31 18:30:09 by dquordle          #+#    #+#             */
+/*   Updated: 2021/03/30 13:45:16 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	size_t	c_word(char const *str, char c)
+static int	counter(char const *s, char c)
 {
-	size_t	count;
-	size_t	i;
+	int	i;
+	int	j;
 
-	count = 0;
+	if (!s[0])
+		return (-1);
 	i = 0;
-	while (str[i])
+	j = 0;
+	while (s[i] && s[i] == c)
+		i++;
+	while (s[i])
 	{
-		while (str[i] && str[i] == c)
-			i++;
-		if (str[i] && str[i] != c)
+		if (s[i] == c)
 		{
-			count++;
-			while (str[i] && str[i] != c)
+			j++;
+			while (s[i + 1] == c)
 				i++;
 		}
-	}
-	return (count);
-}
-
-static	char	*w_malloc(char const *str, char c)
-{
-	char	*w;
-	int		i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	if (!(w = (char *)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != c)
-	{
-		w[i] = str[i];
 		i++;
 	}
-	w[i] = '\0';
-	return (w);
+	if (s[i - 1] == c)
+		j--;
+	return (j);
 }
 
-static	char	**free_all(char **array, int i)
+static int	f_abort(char **res, int k)
 {
-	while (i > 0)
-	{
-		i--;
-		free(array[i]);
-	}
-	free(array);
-	return (NULL);
-}
-
-char			**ft_split(char const *s, char c)
-{
-	int		i;
-	int		a;
-	char	**array;
+	int	i;
 
 	i = 0;
-	a = 0;
-	if (s == NULL)
-		return (NULL);
-	if (!(array = (char **)malloc(sizeof(char *) * (c_word(s, c) + 1))))
-		return (NULL);
-	while (s[a])
+	while (i < k)
+		free(res[i++]);
+	free(res);
+	return (0);
+}
+
+static int	trabaja(char **res, char const *s, char c)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (s[i])
 	{
-		while (s[a] && s[a] == c)
-			a++;
-		if (s[a] && s[a] != c)
-		{
-			if ((array[i++] = w_malloc(&s[a], c)) == NULL)
-				return (free_all(array, i));
-			while (s[a] && s[a] != c)
-				a++;
-		}
+		while (s[i] == c)
+			i++;
+		if (!s[i])
+			break ;
+		j = i;
+		while (s[i] != c && s[i])
+			i++;
+		res[k] = (char *)malloc(i - j + 1);
+		if (!res[k])
+			return (f_abort(res, k));
+		ft_strlcpy(res[k++], s + j, i - j + 1);
+		while (s[i] == c && s[i])
+			i++;
 	}
-	array[i] = NULL;
-	return (array);
+	return (1);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**res;
+
+	if (!s)
+		return (NULL);
+	res = (char **)malloc(sizeof(char *) * (counter(s, c) + 2));
+	if (!res)
+		return (NULL);
+	if (!s[0])
+	{
+		res[0] = NULL;
+		return (res);
+	}
+	if (!(trabaja(res, s, c)))
+		return (NULL);
+	res[counter(s, c) + 1] = NULL;
+	return (res);
 }

@@ -6,11 +6,11 @@
 /*   By: btammara <btammara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 08:39:57 by btammara          #+#    #+#             */
-/*   Updated: 2021/03/28 10:31:23 by btammara         ###   ########.fr       */
+/*   Updated: 2021/07/07 23:26:19 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minishell.h"
+#include "minishell.h"
 
 int	main(int argc, char **argv, char **env)
 {

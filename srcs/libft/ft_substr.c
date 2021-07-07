@@ -1,47 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   susstr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 09:44:06 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/06 17:37:02 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/30 16:05:55 by dquordle          #+#    #+#             */
+/*   Updated: 2021/03/30 13:41:05 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	size_t	strlen(const char *s)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned long int	len;
+	char	*str;
+	size_t	i;
 
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-char			*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	unsigned	int	i;
-	char			*p;
-
-	i = 0;
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	if (start >= strlen(s) || len == 0)
+	i = ft_strlen(s);
+	if (i <= start)
+		len = 0;
+	str = (char *)malloc(len + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		if ((p = (char *)malloc(1 * sizeof(char))))
-			p[0] = '\0';
-		return (p);
+		str[i] = s[start + i];
+		i++;
 	}
-	if ((p = (char *)malloc((len + 1) * sizeof(char))))
-	{
-		while (i < len && s[start] != '\0')
-			p[i++] = s[start++];
-		p[i] = '\0';
-		return (p);
-	}
-	return (NULL);
+	str[i] = 0;
+	return (str);
 }

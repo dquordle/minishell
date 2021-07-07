@@ -1,96 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   putnbr_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 11:19:59 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/12 08:35:25 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/31 14:55:20 by dquordle          #+#    #+#             */
+/*   Updated: 2021/03/30 13:53:37 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int	ccounter(int n1)
-{
-	int counter;
-
-	counter = 0;
-	while (n1 != 0)
-	{
-		n1 = n1 / 10;
-		counter++;
-	}
-	return (counter);
-}
-
-int			check_easy(int n, int fd)
-{
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return (1);
-	}
-	else if (n == 0)
-	{
-		write(fd, "0", 1);
-		return (1);
-	}
-	return (0);
-}
-
-void		positive(int n, int fd)
-{
-	char	str[ccounter(n) + 1];
-	int		count;
-	int		i;
-
-	count = ccounter(n);
-	i = count;
-	while (count-- > 0)
-	{
-		str[count] = n % 10 + 48;
-		n = n / 10;
-	}
-	str[i] = '\0';
-	i = 0;
-	while (str[i])
-		write(fd, &str[i++], 1);
-}
-
-void		negative(int n, int fd)
-{
-	char	str[ccounter(n) + 2];
-	int		count;
-	int		i;
-
-	count = ccounter(n);
-	n = n * -1;
-	i = count;
-	while (count >= 0)
-	{
-		str[count--] = n % 10 + 48;
-		n = n / 10;
-	}
-	str[0] = '-';
-	str[i + 1] = '\0';
-	i = 0;
-	while (str[i])
-		write(fd, &str[i++], 1);
-}
-
-void		ft_putnbr_fd(int n, int fd)
+static int	counter(int n)
 {
 	int	i;
-	int count;
 
-	count = ccounter(n);
-	i = count;
-	if ((check_easy(n, fd)))
-		return ;
-	if (n > 0)
-		positive(n, fd);
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n != 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
+}
+
+static void	ftt_itoa(int n, int fd)
+{
+	char	res[12];
+	int		count;
+	int		quant;
+
+	count = counter(n);
+	quant = count;
+	if (n < 0)
+	{
+		res[0] = '-';
+		n *= -1;
+	}
+	res[count--] = 0;
+	while (n != 0)
+	{
+		res[count--] = n % 10 + 48;
+		n /= 10;
+	}
+	write(fd, res, quant);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else if (n == 0)
+		write(fd, "0", 1);
 	else
-		negative(n, fd);
+		ftt_itoa(n, fd);
 }

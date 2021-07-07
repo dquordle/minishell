@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 08:33:58 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/10 10:55:56 by btammara         ###   ########.fr       */
+/*   Created: 2020/11/03 14:12:41 by dquordle          #+#    #+#             */
+/*   Updated: 2021/03/30 13:20:24 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		size;
-	t_list	*temp;
-	t_list	*b_temp;
-	t_list	*b_list;
+	t_list	*mapa;
+	t_list	*buf;
 
-	if (lst == NULL || (temp = ft_lstnew(f(lst->content))) == NULL)
+	if (!lst)
 		return (NULL);
-	size = ft_lstsize(lst);
-	b_temp = temp;
-	b_list = lst;
-	while (--size)
+	mapa = ft_lstnew((*f)(lst->content));
+	if (!mapa)
+		return (NULL);
+	buf = mapa;
+	lst = lst->next;
+	while (lst)
 	{
-		lst = lst->next;
-		temp->next = ft_lstnew(f(lst->content));
-		if (temp->next == NULL)
+		mapa->next = ft_lstnew((*f)(lst->content));
+		if (!(mapa->next))
 		{
-			lst = b_list;
-			ft_lstclear(&b_temp, del);
+			ft_lstclear(&mapa, (*del));
 			return (NULL);
 		}
-		temp = temp->next;
+		lst = lst->next;
+		mapa = mapa->next;
 	}
-	lst = b_list;
-	return (b_temp);
+	return (buf);
 }

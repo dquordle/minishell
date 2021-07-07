@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 08:01:23 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/06 11:15:18 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/30 11:10:46 by dquordle          #+#    #+#             */
+/*   Updated: 2021/03/30 13:15:58 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*p;
-	size_t			i;
-	size_t			vsego;
+	size_t	i;
+	char	*arr;
 
+	arr = malloc(size * count);
+	if (!arr)
+		return (NULL);
 	i = 0;
-	vsego = count * size;
-	if ((p = (unsigned char *)malloc(count * size)))
-	{
-		while (vsego--)
-			p[i++] = 0;
-		return ((void *)p);
-	}
-	return (NULL);
+	while (i < count * size)
+		arr[i++] = 0;
+	return ((void *)arr);
 }

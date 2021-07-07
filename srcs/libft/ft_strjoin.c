@@ -1,48 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <btammara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 10:38:10 by btammara          #+#    #+#             */
-/*   Updated: 2021/03/28 19:43:37 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/30 16:26:41 by dquordle          #+#    #+#             */
+/*   Updated: 2021/03/30 13:37:42 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	size_t	strlen(const char *s)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned long int	len;
+	char	*res;
+	int		i;
+	int		j;
 
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-char			*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	len;
-	size_t	i;
-	char	*p;
-
-	len = strlen(s1) + strlen(s2);
-	i = 0;
-	if ((p = (char *)malloc((len + 1) * sizeof(char))))
-	{
-		while (s1[i] != '\0')
-		{
-			p[i] = s1[i];
-			i++;
-		}
-		len = i;
-		i = 0;
-		while (s2[i] != '\0')
-			p[len++] = s2[i++];
-		p[len] = '\0';
-		return (p);
-	}
-	return (NULL);
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	res = (char *)malloc(i + j + 1);
+	if (!res)
+		return (NULL);
+	ft_strlcpy(res, s1, i + 1);
+	ft_strlcat(res, s2, i + j + 1);
+	return (res);
 }

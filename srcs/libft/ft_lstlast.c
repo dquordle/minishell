@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 18:02:37 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/10 10:41:15 by btammara         ###   ########.fr       */
+/*   Created: 2020/11/02 19:17:50 by dquordle          #+#    #+#             */
+/*   Updated: 2020/11/02 19:25:14 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*go;
-
-	go = lst;
-	if (lst)
-	{
-		while (go->next != NULL)
-			go = go->next;
-	}
-	return (go);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

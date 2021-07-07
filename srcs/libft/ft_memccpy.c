@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   memccpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/31 11:39:14 by btammara          #+#    #+#             */
-/*   Updated: 2020/10/31 11:39:16 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/29 22:16:50 by dquordle          #+#    #+#             */
+/*   Updated: 2020/11/06 16:07:41 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	unsigned	char	*str1;
-	unsigned	char	*str2;
-	size_t				i;
+	size_t			i;
+	char			*my_dst;
+	unsigned char	*my_src;
 
-	str1 = (unsigned char*)dst;
-	str2 = (unsigned char*)src;
+	my_dst = dst;
+	my_src = (unsigned char *)src;
 	i = 0;
 	while (i < n)
 	{
-		str1[i] = str2[i];
-		if (str2[i] == (unsigned char)c)
-			break ;
+		my_dst[i] = my_src[i];
+		if (my_src[i] == (unsigned char)c)
+			return (dst + i + 1);
 		i++;
 	}
-	if (i == n)
-		return (NULL);
-	return ((void *)dst + i + 1);
+	return (NULL);
 }

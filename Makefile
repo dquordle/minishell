@@ -36,18 +36,18 @@ SRCS =			./srcs/main.c \
 				./srcs/ft_left_redirect.c \
 				./srcs/ft_right_redirect.c \
 				./srcs/ft_pipe.c \
-				./srcs/dquordle/builtins.c \
-				./srcs/dquordle/ft_get_hist.c \
-				./srcs/dquordle/gnl.c \
-				./srcs/dquordle/signals.c \
-				./srcs/dquordle/termcap.c \
-				./srcs/dquordle/more_utils.c \
-				./srcs/dquordle/export.c \
-				./srcs/dquordle/unset.c \
-				./srcs/dquordle/exit.c \
-				./srcs/dquordle/cd_env.c \
-				./srcs/dquordle/built_utils.c \
-				./srcs/dquordle/term_utils.c
+				./srcs/builtins.c \
+				./srcs/ft_get_hist.c \
+				./srcs/gnl.c \
+				./srcs/signals.c \
+				./srcs/termcap.c \
+				./srcs/more_utils.c \
+				./srcs/export.c \
+				./srcs/unset.c \
+				./srcs/exit.c \
+				./srcs/cd_env.c \
+				./srcs/built_utils.c \
+				./srcs/term_utils.c
 
 OBJS =			$(SRCS:.c=.o)
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   strrchr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/31 18:56:06 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/04 14:58:09 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/29 13:53:19 by dquordle          #+#    #+#             */
+/*   Updated: 2020/11/06 16:15:38 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
+	char	*str;
 	int		i;
-	int		last;
+	int		j;
 
 	i = 0;
-	last = 0;
-	while (s[i] != '\0')
+	j = -1;
+	str = (char *)s;
+	while (str[i])
 	{
-		if (s[i] == c)
-			last = i;
+		if (str[i] == c)
+			j = i;
 		i++;
 	}
-	if (last != 0 || s[0] == c)
-		return ((char *)s + last);
-	else if (s[i] == c)
-		return ((char *)s + i);
+	if (j != -1)
+		return (&str[j]);
+	else if (c == 0)
+		return (&str[i]);
 	return (NULL);
 }

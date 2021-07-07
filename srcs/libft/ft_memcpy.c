@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   memcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btammara <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dquordle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/30 18:02:33 by btammara          #+#    #+#             */
-/*   Updated: 2020/11/06 11:02:41 by btammara         ###   ########.fr       */
+/*   Created: 2020/10/29 21:57:34 by dquordle          #+#    #+#             */
+/*   Updated: 2020/11/06 16:09:22 by dquordle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char			*str1;
-	const	char	*str2;
-	size_t			i;
+	char		*my_dst;
+	const char	*my_src;
 
-	str1 = (char *)dst;
-	str2 = (const char *)src;
-	i = 0;
-	if (dst == NULL && src == NULL)
+	if (src == NULL && dst == NULL)
 		return (NULL);
-	if (str1 == str2)
-		return (dst);
-	while (i < n)
-	{
-		str1[i] = str2[i];
-		i++;
-	}
+	my_dst = dst;
+	my_src = src;
+	while (n--)
+		my_dst[n] = my_src[n];
 	return (dst);
 }
